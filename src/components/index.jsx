@@ -5,7 +5,11 @@ function Home() {
 	return (
 		<>
 			<div className="container">
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, et! Expedita praesentium nam ut natus!</p>
+				<div className="main-body">
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, et! Expedita praesentium nam ut natus!</p>
+
+				</div>
+
 			</div>
 
 		</>
