@@ -1,6 +1,64 @@
-@import 'bootstrap';
+@import "bootstrap";
 
-.main-body{
-	color: red;
+body {
+	background-color: #222427;
+}
+.main-body {
+color: rgb(194, 190, 190);
 	min-height: 100vh;
+}
+
+.main-body h4 {
+	text-align: center;
+	color: rgb(184, 179, 179);
+}
+
+.main-card{
+
+}
+.search-part{
+	margin-top: 15px;
+	border: solid 1px rgb(68, 68, 67);
+
+	display: flex;
+	justify-content: center;
+
+}
+
+.search-part form{
+width: 100%;
+	margin: 3px;
+}
+
+.custom-select {
+	background-color: #292727;
+	color: #d97b16;
+	border-radius: 20px;
+	padding: 6px 20px;
+	border-color: #5c0f0f;
+	width: 100%;
+}
+.custom-select:focus {
+	border-color: #5c0f0f;
+	outline: 0;
+	color: #d97b16;
+	box-shadow: none;
+	/* box-shadow: 0 0 0 0.2rem rgba(207, 23, 23, 0.25); */
+}
+
+
+.form-label{
+display: flex;
+justify-content: center;
+margin: 0;
+}
+
+:global(.form-group){
+	margin-bottom: 0;
+}
+
+.pagination-part{
+	display: flex;
+	justify-content: center;
+	padding-top: 8px;
 }
