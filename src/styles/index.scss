@@ -31,7 +31,7 @@ color: #b7cbd9;
 	border: solid 1px rgb(39, 39, 39);
 	border-radius: 5px;
 	width: 100%;
-	display: flex;
+	display: none;
 	justify-content: center;
 
 }
@@ -176,3 +176,29 @@ font-size: 20px;
 .view-btn:hover{
 	background: #097205;;
 }
+
+
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+
+
+	}
+
+
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px)
+{
+
+.search-part{
+	display: flex;
+}
+
+ }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {  }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {  }
