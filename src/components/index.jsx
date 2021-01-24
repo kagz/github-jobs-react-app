@@ -92,7 +92,7 @@ function Home() {
 							{/* card smaple */}
 							{
 								jobs.map(job => (
-									<div className="col-lg-4 col-md-12 col-xs-12 " key={job.id}>
+									<div className="col-lg-4 col-md-6 col-xs-12 " key={job.id}>
 										<div className="card-box">
 											<Link to={`/job/${job.id}`}>
 												<div>
