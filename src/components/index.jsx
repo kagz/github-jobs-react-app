@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 import {
-	Badge, Form, Image,
+	Badge, Col, Form, Image, Row,
 } from 'react-bootstrap';
 import { FcOvertime } from 'react-icons/fc';
 import { GoLocation } from 'react-icons/go';
@@ -43,6 +43,7 @@ function Home() {
 			},
 		],
 	);
+
 	useEffect(() => {
 		client.get(baseURL).then(setJobs);
 	}, []);
@@ -61,10 +62,27 @@ function Home() {
 
 								<Form.Group>
 									<Form.Label className="form-label">Type</Form.Label>
-									<Form.Control as="select" custom className="custom-text">
-										<option>Full Time</option>
-										<option>Part Time</option>
-									</Form.Control>
+									<div className="custom-text text-center">
+										{/* <Row> */}
+										<Form.Check
+											custom
+											inline
+											type="radio"
+											label="Full Time"
+											name="fulltime"
+											id="fulltime"
+										/>
+										<Form.Check
+											custom
+											inline
+											type="radio"
+											label="Part Time"
+											name="parttime"
+											id="parttime"
+										/>
+
+										{/* </Row> */}
+									</div>
 								</Form.Group>
 							</Form>
 

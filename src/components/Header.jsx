@@ -4,7 +4,7 @@ import { Nav, Navbar } from 'react-bootstrap';
 function Header() {
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-			<Navbar.Brand href="/">Github Jobs React App</Navbar.Brand>
+			<Navbar.Brand href="/">Dev Jobs</Navbar.Brand>
 			<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="ml-auto">

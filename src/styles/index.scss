@@ -35,6 +35,15 @@ body {
 	justify-content: center;
 }
 
+// custom select
+
+.custom-control-label::before {
+	background-color:#d97b16;
+	border: #b7cbd9 solid 1px;
+}
+
+
+
 .search-part form {
 	width: 100%;
 	margin: 3px;
@@ -173,12 +182,12 @@ body {
 
 
 #overlay{
-	position: fixed;
-	z-index: 5;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
+	// position: fixed;
+	// z-index: 5;
+	// top: 0;
+	// right: 0;
+	// bottom: 0;
+	// left: 0;
 	// background-color: rgb(27, 37, 12);
 	// cursor: pointer;
 
