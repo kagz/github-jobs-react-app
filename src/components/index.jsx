@@ -2,12 +2,13 @@
 import React, { useState, useEffect } from 'react';
 
 import {
-	Badge, Form, Image, Pagination,
+	Badge, Form, Image,
 } from 'react-bootstrap';
 import { FcOvertime } from 'react-icons/fc';
 import { GoLocation } from 'react-icons/go';
 import { Link } from 'react-router-dom';
 import client from '../client';
+import Paginations from './Pagination';
 
 const baseURL = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json';
 
@@ -68,25 +69,9 @@ function Home() {
 							</Form>
 
 						</div>
-						<div className="pagination-part">
-							<Pagination>
-								{/* <Pagination.First /> */}
-								{/* <Pagination.Prev /> */}
-								{/* <Pagination.Item>{1}</Pagination.Item> */}
-								{/* <Pagination.Ellipsis /> */}
-								<Pagination.Item>{1}</Pagination.Item>
-								<Pagination.Item>{2}</Pagination.Item>
-								<Pagination.Item>{3}</Pagination.Item>
-								<Pagination.Item>{4}</Pagination.Item>
 
-								{/* <Pagination.Item active>{12}</Pagination.Item> */}
-								<Pagination.Item>{5}</Pagination.Item>
-								{/* <Pagination.Ellipsis /> */}
-								{/* <Pagination.Item>{20}</Pagination.Item> */}
-								{/* <Pagination.Next /> */}
-								{/* <Pagination.Last /> */}
-							</Pagination>
-						</div>
+						<Paginations />
+
 						<div className="job-card row">
 
 							{/* card smaple */}
@@ -136,25 +121,7 @@ function Home() {
 							}
 							{/* card smaple */}
 						</div>
-						<div className="pagination-part">
-							<Pagination>
-								{/* <Pagination.First /> */}
-								{/* <Pagination.Prev /> */}
-								{/* <Pagination.Item>{1}</Pagination.Item> */}
-								{/* <Pagination.Ellipsis /> */}
-								<Pagination.Item>{1}</Pagination.Item>
-								<Pagination.Item>{2}</Pagination.Item>
-								<Pagination.Item>{3}</Pagination.Item>
-								<Pagination.Item>{4}</Pagination.Item>
-
-								{/* <Pagination.Item active>{12}</Pagination.Item> */}
-								<Pagination.Item>{5}</Pagination.Item>
-								{/* <Pagination.Ellipsis /> */}
-								{/* <Pagination.Item>{20}</Pagination.Item> */}
-								{/* <Pagination.Next /> */}
-								{/* <Pagination.Last /> */}
-							</Pagination>
-						</div>
+						<Paginations />
 					</div>
 				</div>
 
