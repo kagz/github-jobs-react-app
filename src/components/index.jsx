@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 import {
-	Badge, Col, Form, Image, Pagination, Row,
+	Badge, Form, Image, Pagination,
 } from 'react-bootstrap';
 import { FcOvertime } from 'react-icons/fc';
 import { GoLocation } from 'react-icons/go';
@@ -15,7 +15,7 @@ function Home() {
 	const [jobs, setJobs] = useState(
 		[
 			{
-				id: 'db0ff9f6-966c-4376-956f-c9f393d9fce8',
+				id: 'db0ff9f6-966c-4376-956f-c9f393d9f666',
 				type: 'Full Time',
 				url: 'https://jobs.github.com/positions/db0ff9f6-966c-4376-956f-c9f393d9fce8',
 				created_at: 'Fri Jan 22 15:39:45 UTC 2021',
@@ -28,7 +28,7 @@ function Home() {
 				company_logo: 'https://jobs.github.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbStXIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--b8a551a3c84317266c1f3dfe846ded212a933e24/TS%20Linkedin%20Logo.jpeg',
 			},
 			{
-				id: 'db0ff9f6-966c-4376-956f-c9f393d9fce8',
+				id: 'db0ff9f6-966c-4376-956f-c9f393d555',
 				type: 'Full Time',
 				url: 'https://jobs.github.com/positions/db0ff9f6-966c-4376-956f-c9f393d9fce8',
 				created_at: 'Fri Jan 22 15:39:45 UTC 2021',
@@ -51,7 +51,7 @@ function Home() {
 				<div className="main-body">
 					<h2>Search For Developer Jobs</h2>
 					<div className="main-card">
-						<div >
+						<div>
 							<Form className="search-part">
 								<Form.Group>
 									<Form.Label className="form-label">Location</Form.Label>
@@ -159,7 +159,7 @@ function Home() {
 				</div>
 
 			</div>
-
+			<div id="overlay" />
 		</>
 	);
 }
