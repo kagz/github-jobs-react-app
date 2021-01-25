@@ -41,11 +41,6 @@ function Home() {
 						<div>
 							<Form className="search-part">
 								<Form.Group>
-									<Form.Label className="form-label">Description</Form.Label>
-									<Form.Control placeholder="Javascript,Python etc" type="text" name="description" className="custom-text" />
-								</Form.Group>
-
-								<Form.Group>
 									<Form.Label className="form-label">Location</Form.Label>
 									<Form.Control placeholder="Where?" type="text" name="location" className="custom-text" />
 								</Form.Group>
