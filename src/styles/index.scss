@@ -180,19 +180,22 @@ body {
 	background: #097205;
 }
 
-
-#overlay{
-	// position: fixed;
-	// z-index: 5;
-	// top: 0;
-	// right: 0;
-	// bottom: 0;
-	// left: 0;
-	// background-color: rgb(27, 37, 12);
-	// cursor: pointer;
-
+.form-wrapper {
+  @media (max-width: 768px) {
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform .3s ease-in-out;
+    background-color: rgb(27, 37, 12);
+    &.active {
+      transform: translateX(0);
+    }
+  }
 }
-
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
