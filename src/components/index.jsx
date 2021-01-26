@@ -1,12 +1,14 @@
 /* eslint-disable max-len */
+import Button from 'react-bootstrap/Button';
 import React, { useState, useEffect } from 'react';
-
 import {
 	Badge, Form, Image,
 } from 'react-bootstrap';
+import { FaSearchMinus, FaSearchPlus } from 'react-icons/fa';
 import { FcOvertime } from 'react-icons/fc';
 import { GoLocation } from 'react-icons/go';
 import { Link } from 'react-router-dom';
+import cn from 'classnames';
 import client from '../client';
 import Paginations from './Pagination';
 
@@ -47,13 +49,16 @@ function Home() {
 	useEffect(() => {
 		client.get(baseURL).then(setJobs);
 	}, []);
+
+	const [open, setOpen] = useState(false);
+
 	return (
 		<>
 			<div className="container">
 				<div className="main-body">
 					<h2>Search For Developer Jobs</h2>
 					<div className="main-card">
-						<div id="responsive-navbar-nav" className="form-wrapper">
+						<div className={cn('d-none d-sm-block ', open && 'form-wrapper')}>
 							<Form className="search-part">
 								<Form.Group>
 									<Form.Label className="form-label">Location</Form.Label>
@@ -93,9 +98,18 @@ function Home() {
 									</div>
 								</Form.Group>
 							</Form>
-
 						</div>
+						<div className="mobile-search d-md-none">
+							<Button
+								onClick={() => setOpen(prevOpen => !prevOpen)}
+								variant="secondary"
+								size="sm"
+							>
 
+								{open ? <FaSearchMinus /> : <FaSearchPlus />}
+
+							</Button>
+						</div>
 						<Paginations />
 
 						<div className="job-card row">
