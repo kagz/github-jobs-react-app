@@ -4,7 +4,7 @@ body {
 	background-color: #1f1f20;
 }
 .main-body {
-color: #b7cbd9;
+	color: #b7cbd9;
 	min-height: 100vh;
 	border-radius: 5px;
 	// background: #100e17;
@@ -16,28 +16,36 @@ color: #b7cbd9;
 	text-align: center;
 	color: #58a6ff;
 	margin: 8px;
+	display: none;
 }
 
-.main-card{
+.main-card {
 	padding: 20px;
 	border-radius: 5px;
 	background: #100e17;
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 	margin: 7px;
-
 }
-.search-part{
+.search-part {
 	margin-top: 15px;
 	border: solid 1px rgb(39, 39, 39);
 	border-radius: 5px;
 	width: 100%;
-	display: flex;
+	// display: none;
 	justify-content: center;
-
 }
 
-.search-part form{
-width: 100%;
+// custom select
+
+.custom-control-label::before {
+	background-color:#d97b16;
+	border: #b7cbd9 solid 1px;
+}
+
+
+
+.search-part form {
+	width: 100%;
 	margin: 3px;
 }
 
@@ -58,30 +66,29 @@ width: 100%;
 	/* box-shadow: 0 0 0 0.2rem rgba(207, 23, 23, 0.25); */
 }
 .form-group {
-
 	width: 100%;
 	padding: 3px;
 }
 
-.form-label{
-display: flex;
-justify-content: center;
-margin: 0;
+.form-label {
+	display: flex;
+	justify-content: center;
+	margin: 0;
 }
 
-:global(.form-group){
+:global(.form-group) {
 	margin-bottom: 0;
 }
 
-.pagination-part{
+.pagination-part {
 	display: flex;
 	justify-content: center;
 	padding-top: 8px;
 }
 
-
-
-.page-link, .page-item:first-child .page-link ,.page-item:last-child .page-link{
+.page-link,
+.page-item:first-child .page-link,
+.page-item:last-child .page-link {
 	width: 40px;
 	display: flex;
 	height: 40px;
@@ -94,7 +101,6 @@ margin: 0;
 	justify-content: center;
 	align-items: center;
 	border: 3px solid #2ecc71;
-
 }
 .page-link:hover {
 	z-index: 2;
@@ -104,7 +110,17 @@ margin: 0;
 	border: 3px solid #2ecc71;
 }
 
-.card-box{
+// mobile search
+.mobile-search{
+	display: flex;
+	// border: 3px solid #e00a99;
+	justify-content: flex-end;
+}
+.mobile-search .btn{
+	border-radius: 50%;
+}
+
+.card-box {
 	background-color: #222121;
 	// border: 1px solid rgb(66, 62, 62);
 	padding: 20px;
@@ -114,17 +130,15 @@ margin: 0;
 	box-shadow: 5px 5px 10px rgba(27, 27, 27, 0.5);
 }
 
-.card-box>a{
+.card-box > a {
 	color: inherit;
-
 }
 
-.card-box>a:hover{
+.card-box > a:hover {
 	text-decoration: none;
-
 }
 
-.company-detail{
+.company-detail {
 	// border: 1px solid white;
 	width: 100%;
 	text-align: center;
@@ -132,12 +146,12 @@ margin: 0;
 	margin-bottom: 3px;
 }
 
-.company-detail img{
+.company-detail img {
 	height: 98px;
 	width: 98px;
 }
 
-.job-description{
+.job-description {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -145,25 +159,24 @@ margin: 0;
 
 .job-description ul {
 	display: flex;
-padding: 0;
+	padding: 0;
 }
 
-.job-description ul li{
+.job-description ul li {
 	display: flex;
 	// flex-direction: column;
 	// align-items: center;
 	margin: 6px;
 }
 
-.badge-time svg, .badge-location svg{
-font-size: 20px;
+.badge-time svg,
+.badge-location svg {
+	font-size: 20px;
 }
 
-
-
-.view-btn{
+.view-btn {
 	display: inline-block;
-	background: #044902;;
+	background: #044902;
 	padding: 0.45em 1em;
 	width: 100%;
 	text-align: center;
@@ -173,6 +186,53 @@ font-size: 20px;
 	letter-spacing: 0.2px;
 	font-size: 17px;
 }
-.view-btn:hover{
-	background: #097205;;
+.view-btn:hover {
+	background: #097205;
+}
+
+.form-wrapper {
+  @media (max-width: 768px) {
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform .3s ease-in-out;
+    background-color: rgb(27, 37, 12);
+    &.active {
+      transform: translateX(0);
+    }
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+	.search-part {
+		display: flex;
+		flex-direction: column;
+	}
+	.main-body h2 {
+		text-align: center;
+		color: #58a6ff;
+		margin: 8px;
+		display: block;
+	}
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+	.search-part {
+		display: flex;
+		flex-direction: row;
+	}
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
 }
