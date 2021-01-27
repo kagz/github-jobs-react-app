@@ -51,6 +51,11 @@ function Home() {
 	}, []);
 
 	const [open, setOpen] = useState(false);
+	const [checked, setChecked] = useState(true);
+	const checkboxes = [
+		{ name: 'fulltime', label: 'Full Time' },
+		{ name: 'parttime', label: 'Part Time' },
+	];
 
 	return (
 		<>
@@ -68,30 +73,22 @@ function Home() {
 									<Form.Label className="form-label">Type</Form.Label>
 									<div className="custom-text text-center">
 										{/* <Row> */}
-										<Form.Check
-											custom
-											inline
-											type="radio"
-											label="All"
-											name="all"
-											id="all"
-										/>
-										<Form.Check
-											custom
-											inline
-											type="radio"
-											label="Full Time"
-											name="fulltime"
-											id="fulltime"
-										/>
-										<Form.Check
-											custom
-											inline
-											type="radio"
-											label="Part Time"
-											name="parttime"
-											id="parttime"
-										/>
+										{
+											checkboxes.map((cb, index) => (
+												<Form.Check
+													// eslint-disable-next-line react/no-array-index-key
+													key={index}
+													custom
+													inline
+													type="checkbox"
+													label={cb.label}
+													name={cb.name}
+													id={cb.name}
+													checked={checked}
+													onChange={() => setChecked(prevChecked => !prevChecked)}
+												/>
+											))
+										}
 
 										{/* </Row> */}
 									</div>
