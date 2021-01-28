@@ -51,23 +51,22 @@ function Home() {
 				<div className="main-body">
 					<h2>Search For Developer Jobs</h2>
 					<div className="main-card">
-						<div >
-							<Form className="search-part">
-								<Form.Group>
-									<Form.Label className="form-label">Location</Form.Label>
-									<Form.Control placeholder="Where?" type="text" name="location" className="custom-text" />
-								</Form.Group>
 
-								<Form.Group>
-									<Form.Label className="form-label">Type</Form.Label>
-									<Form.Control as="select" custom className="custom-text">
-										<option>Full Time</option>
-										<option>Part Time</option>
-									</Form.Control>
-								</Form.Group>
-							</Form>
+						<Form className="search-form">
+							<Form.Group>
+								<Form.Label className="form-label">Location</Form.Label>
+								<Form.Control placeholder="Where?" type="text" name="location" className="custom-text" />
+							</Form.Group>
 
-						</div>
+							<Form.Group>
+								<Form.Label className="form-label">Type</Form.Label>
+								<Form.Control as="select" custom className="custom-text">
+									<option>Full Time</option>
+									<option>Part Time</option>
+								</Form.Control>
+							</Form.Group>
+						</Form>
+
 						<div className="pagination-part">
 							<Pagination>
 								{/* <Pagination.First /> */}
