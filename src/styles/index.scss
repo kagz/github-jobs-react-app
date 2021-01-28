@@ -38,15 +38,8 @@ body {
 // custom select
 
 .custom-control-label::before {
-	background-color:#d97b16;
+	background-color: #d97b16;
 	border: #b7cbd9 solid 1px;
-}
-
-
-
-.search-form form {
-	width: 100%;
-	margin: 3px;
 }
 
 .custom-checkbox {
@@ -56,10 +49,6 @@ body {
 	padding: 6px 20px;
 	border-color: #5c0f0f;
 	width: 100%;
-
-
-
-
 }
 .custom-checkbox:focus {
 	border-color: #5c0f0f;
@@ -115,12 +104,12 @@ body {
 }
 
 // mobile search
-.mobile-search{
+.mobile-search {
 	display: flex;
 	// border: 3px solid #e00a99;
 	justify-content: flex-end;
 }
-.mobile-search .btn{
+.mobile-search .btn {
 	border-radius: 50%;
 }
 
@@ -195,20 +184,20 @@ body {
 }
 
 .form-wrapper {
-  @media (max-width: 768px) {
-    position: fixed;
-    z-index: 5;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    transform: translateX(-100%);
-    transition: transform .3s ease-in-out;
-    background-color: rgb(27, 37, 12);
-    &.active {
-      transform: translateX(0);
-    }
-  }
+	@media (max-width: 768px) {
+		position: fixed;
+		z-index: 5;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		transform: translateX(-100%);
+		transition: transform 0.3s ease-in-out;
+		background-color: rgb(27, 37, 12);
+		&.active {
+			transform: translateX(0);
+		}
+	}
 }
 
 // Small devices (landscape phones, 576px and up)
