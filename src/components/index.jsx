@@ -42,15 +42,15 @@ function Home() {
 				<div className="main-body">
 					<h2>Search For Developer Jobs</h2>
 					<div className="main-card">
-						<div className={cn(' form-wrapper', open && 'active')}>
-							<Form className="search-part">
+						<div className={cn('form-wrapper', open && 'active')}>
+							<Form className="search-form">
 								<Form.Group>
 									<Form.Label className="form-label">Location</Form.Label>
-									<Form.Control placeholder="Where?" type="text" name="location" className="custom-text" />
+									<Form.Control placeholder="Where?" type="text" name="location" className="custom-checkbox" />
 								</Form.Group>
 								<Form.Group>
 									<Form.Label className="form-label">Type</Form.Label>
-									<div className="custom-text text-center">
+									<div className="custom-checkbox text-center">
 										{/* <Row> */}
 										<Form.Check
 											custom

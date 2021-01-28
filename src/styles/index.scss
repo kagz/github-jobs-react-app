@@ -26,7 +26,7 @@ body {
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 	margin: 7px;
 }
-.search-part {
+.search-form {
 	margin-top: 15px;
 	border: solid 1px rgb(39, 39, 39);
 	border-radius: 5px;
@@ -44,20 +44,24 @@ body {
 
 
 
-.search-part form {
+.search-form form {
 	width: 100%;
 	margin: 3px;
 }
 
-.custom-text {
+.custom-checkbox {
 	background-color: #292727;
 	color: #d97b16;
 	border-radius: 20px;
 	padding: 6px 20px;
 	border-color: #5c0f0f;
 	width: 100%;
+
+
+
+
 }
-.custom-text:focus {
+.custom-checkbox:focus {
 	border-color: #5c0f0f;
 	outline: 0;
 	color: #e9e9e9;
@@ -213,7 +217,7 @@ body {
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
-	.search-part {
+	.search-form {
 		display: flex;
 		flex-direction: column;
 	}
@@ -227,7 +231,7 @@ body {
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
-	.search-part {
+	.search-form {
 		display: flex;
 		flex-direction: row;
 	}
