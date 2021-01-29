@@ -82,6 +82,21 @@ body {
 	margin-bottom: 0;
 }
 
+
+// mobile search
+.mobile-search{
+	display: flex;
+	// border: 3px solid #e00a99;
+	justify-content: flex-end;
+
+.btn{
+	border-radius: 50%;
+}
+
+
+
+}
+
 .pagination-part {
 	display: flex;
 	justify-content: center;
