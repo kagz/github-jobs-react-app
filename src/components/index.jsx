@@ -2,12 +2,14 @@
 import React, { useState, useEffect } from 'react';
 
 import {
-	Badge, Form, Image, Pagination,
+	Badge, Button, Image, Pagination,
 } from 'react-bootstrap';
+import { FaSearchMinus, FaSearchPlus } from 'react-icons/fa';
 import { FcOvertime } from 'react-icons/fc';
 import { GoLocation } from 'react-icons/go';
 import { Link } from 'react-router-dom';
 import client from '../client';
+import SearchJob from './SearchJob';
 
 const baseURL = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json';
 
@@ -45,6 +47,7 @@ function Home() {
 	useEffect(() => {
 		client.get(baseURL).then(setJobs);
 	}, []);
+	const [open, setOpen] = useState(false);
 	return (
 		<>
 			<div className="container">
@@ -52,21 +55,18 @@ function Home() {
 					<h2>Search For Developer Jobs</h2>
 					<div className="main-card">
 
-						<Form className="search-form">
-							<Form.Group>
-								<Form.Label className="form-label">Location</Form.Label>
-								<Form.Control placeholder="Where?" type="text" name="location" className="custom-text" />
-							</Form.Group>
+						<SearchJob />
+						<div className="mobile-search d-md-none">
+							<Button
+								onClick={() => setOpen(prevOpen => !prevOpen)}
+								variant="secondary"
+								size="sm"
+							>
 
-							<Form.Group>
-								<Form.Label className="form-label">Type</Form.Label>
-								<Form.Control as="select" custom className="custom-text">
-									<option>Full Time</option>
-									<option>Part Time</option>
-								</Form.Control>
-							</Form.Group>
-						</Form>
+								{open ? <FaSearchMinus /> : <FaSearchPlus />}
 
+							</Button>
+						</div>
 						<div className="pagination-part">
 							<Pagination>
 								{/* <Pagination.First /> */}
