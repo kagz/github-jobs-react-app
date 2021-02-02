@@ -2,7 +2,7 @@
 import Button from 'react-bootstrap/Button';
 import React, { useState, useEffect } from 'react';
 import {
-	Badge, Col, Form, Image, Row,
+	Badge, Col, Container, Form, Image, Row,
 } from 'react-bootstrap';
 import styled from 'styled-components';
 import { FaSearchMinus, FaSearchPlus } from 'react-icons/fa';
@@ -31,10 +31,11 @@ border-radius: 20px;
 padding: 6px 20px;
 border-color: #5c0f0f;
 width: 100%;
+outline: none;
 text-align: center;
 &:focus {
 border-color: #5c0f0f;
-outline: 0;
+outline: none;
 color: #e9e9e9;
 box-shadow: none;
 background-color: rgb(85, 83, 83);
@@ -43,24 +44,25 @@ background-color: rgb(85, 83, 83);
 `;
 
 const StyledFormLabel = styled(Form.Label)`
-display: flex;
-justify-content: center;
-margin: 0;
+	display: flex;
+	justify-content: center;
+	margin: 0;
 `;
 
 
 
 const MainBody = styled.div `
-color: #b7cbd9;
-min-height: 100vh;
-border-radius: 5px;`
+	color: #b7cbd9;
+	min-height: 100vh;
+	border-radius: 5px;
+`;
 
 const MainCard =styled.div`
-padding: 20px;
-border-radius: 5px;
-background: #100e17;
-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-margin: 7px;
+	padding: 20px;
+	border-radius: 5px;
+	background: #100e17;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+	margin: 7px;
 `;
 
 const Title = styled.h1`
@@ -181,7 +183,7 @@ function Home() {
 
 	return (
 		<>
-			<div className="container">
+			<Container>
 				<MainBody>
 					<Title>Search For Developer Jobs</Title>
 					<MainCard>
@@ -189,7 +191,7 @@ function Home() {
 							<StyledForm >
 								<Form.Group>
 									<StyledFormLabel >Location</StyledFormLabel>
-									<StyledFormControl placeholder="Where?" type="text" name="location" />
+									<StyledFormControl placeholder="Where?" type="text" name="place" />
 								</Form.Group>
 								<Form.Group>
 									<StyledFormLabel >Type</StyledFormLabel>
@@ -217,21 +219,21 @@ function Home() {
 									</div>
 								</Form.Group>
 							</StyledForm>
+
 							<div className="mobile-search d-md-none">
 								<Button
 									onClick={() => setOpen(prevOpen => !prevOpen)}
 									variant="secondary"
 									size="sm"
 								>
-
 									{open ? <FaSearchMinus /> : <FaSearchPlus />}
-
 								</Button>
 							</div>
 
 						</div>
 						<div className="mobile-search d-md-none">
 							<Button
+
 								onClick={() => setOpen(prevOpen => !prevOpen)}
 								variant="secondary"
 								size="sm"
@@ -296,7 +298,7 @@ function Home() {
 					</MainCard>
 				</MainBody>
 
-			</div>
+			</Container>
 
 		</>
 	);

@@ -87,6 +87,11 @@ const base = {
 			},
 		],
 	},
+
+	// adding this solved that problem
+	devServer: {
+		historyApiFallback: true,
+	},
 	plugins: [
 		new HtmlPlugin({ template: path.resolve('src/template.html') }),
 		new MiniCssExtractPlugin(),

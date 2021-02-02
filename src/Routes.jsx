@@ -10,6 +10,7 @@ function Routes() {
 			<GlobalStyle />
 
 			<Switch>
+
 				<Route path="/" exact component={Home} />
 				<Route path="/job/:id" exact component={JobDetail} />
 			</Switch>

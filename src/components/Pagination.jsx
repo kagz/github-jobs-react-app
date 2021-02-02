@@ -5,7 +5,7 @@ import {
 import styled from 'styled-components';
 
 const StyledPagination = styled.div`
-display: flex;
+	display: flex;
 	justify-content: center;
 	padding-top: 8px;
 `;
