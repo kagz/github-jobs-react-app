@@ -2,8 +2,9 @@
 import Button from 'react-bootstrap/Button';
 import React, { useState, useEffect } from 'react';
 import {
-	Badge, Form, Image,
+	Badge, Col, Form, Image, Row,
 } from 'react-bootstrap';
+import styled from 'styled-components';
 import { FaSearchMinus, FaSearchPlus } from 'react-icons/fa';
 import { FcOvertime } from 'react-icons/fc';
 import { GoLocation } from 'react-icons/go';
@@ -13,6 +14,131 @@ import client from '../client';
 import Paginations from './Pagination';
 
 const baseURL = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json';
+
+
+const StyledForm = styled(Form)`
+margin-top: 15px;
+border: solid 1px rgb(39, 39, 39);
+border-radius: 5px;
+width: 100%;
+justify-content: center;
+`;
+
+const StyledFormControl = styled(Form.Control)`
+background-color: #292727;
+color: #d97b16;
+border-radius: 20px;
+padding: 6px 20px;
+border-color: #5c0f0f;
+width: 100%;
+text-align: center;
+&:focus {
+border-color: #5c0f0f;
+outline: 0;
+color: #e9e9e9;
+box-shadow: none;
+background-color: rgb(85, 83, 83);
+}
+
+`;
+
+const StyledFormLabel = styled(Form.Label)`
+display: flex;
+justify-content: center;
+margin: 0;
+`;
+
+
+
+const MainBody = styled.div `
+color: #b7cbd9;
+min-height: 100vh;
+border-radius: 5px;`
+
+const MainCard =styled.div`
+padding: 20px;
+border-radius: 5px;
+background: #100e17;
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+margin: 7px;
+`;
+
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: #75062b;
+`;
+const CardBox = styled.div`
+background-color: #222121;
+padding: 20px;
+margin-bottom: 20px;
+width: 100%;
+border-radius: 5px;
+box-shadow: 5px 5px 10px rgba(27, 27, 27, 0.5);
+`
+const StyledLink = styled(Link)`
+color: inherit;
+&:hover {
+	text-decoration: none;
+	color: inherit;
+}
+`;
+
+const CompanyDetail = styled.div`
+width: 100%;
+text-align: center;
+border-bottom: 1px solid #696565;
+margin-bottom: 3px;
+
+`;
+
+const CompanyLogo = styled(Image)`
+height: 98px;
+	width: 98px;
+`;
+const JobDescription = styled.div`
+display: flex;
+align-items: center;
+flex-direction: column;
+overflow: hidden;
+  text-overflow: ellipsis;
+
+`;
+const JobLocation = styled.ul`
+display: flex;
+padding: 0;
+list-style:none;
+`;
+
+const TimeIcon = styled(FcOvertime)`
+font-size: 20px;
+`;
+
+const LocIcon =styled(GoLocation)`
+font-size: 20px;
+`;
+
+const ClickButton = styled.span`
+	display: inline-block;
+	background: #044902;
+	padding: 0.45em 1em;
+	width: 100%;
+	text-align: center;
+	border-radius: 5px;
+	color: #fff;
+	font-weight: 500;
+	letter-spacing: 0.2px;
+	font-size: 17px;
+&:hover {
+	background: #097205;
+}
+`;
+
+const JobTitle = styled.h5`
+	color: #b5143d;
+    font-size: larger;
+`;
+
 
 function Home() {
 	const [jobs, setJobs] = useState(
@@ -56,18 +182,18 @@ function Home() {
 	return (
 		<>
 			<div className="container">
-				<div className="main-body">
-					<h2>Search For Developer Jobs</h2>
-					<div className="main-card">
-						<div className={cn(' form-wrapper', open && 'active')}>
-							<Form className="search-part">
+				<MainBody>
+					<Title>Search For Developer Jobs</Title>
+					<MainCard>
+						<div className={cn('form-wrapper', open && 'active')}>
+							<StyledForm >
 								<Form.Group>
-									<Form.Label className="form-label">Location</Form.Label>
-									<Form.Control placeholder="Where?" type="text" name="location" className="custom-text" />
+									<StyledFormLabel >Location</StyledFormLabel>
+									<StyledFormControl placeholder="Where?" type="text" name="location" />
 								</Form.Group>
 								<Form.Group>
-									<Form.Label className="form-label">Type</Form.Label>
-									<div className="custom-text text-center">
+									<StyledFormLabel >Type</StyledFormLabel>
+									<div className="text-center">
 										{/* <Row> */}
 
 										<Form.Check
@@ -90,7 +216,7 @@ function Home() {
 										{/* </Row> */}
 									</div>
 								</Form.Group>
-							</Form>
+							</StyledForm>
 							<div className="mobile-search d-md-none">
 								<Button
 									onClick={() => setOpen(prevOpen => !prevOpen)}
@@ -117,63 +243,61 @@ function Home() {
 						</div>
 						<Paginations />
 
-						<div className="job-card row">
+						<Row>
 
 							{/* card smaple */}
 							{
-								jobs.map(job => (
-									<div className="col-lg-4 col-md-6 col-xs-12 " key={job.id}>
-										<div className="card-box">
-											<Link to={`/job/${job.id}`}>
+								jobs?.map(job => (
+									<Col lg={4} md={6} xs={12}  key={job.id}>
+										<CardBox >
+											<StyledLink to={`/job/${job.id}`}>
 												<div>
-													<div className="company-detail">
-														<Image src={job.company_logo} roundedCircle />
+													<CompanyDetail >
+														<CompanyLogo src={job.company_logo} roundedCircle />
 														<h6>
 															{job.company}
 														</h6>
-													</div>
+													</CompanyDetail>
 												</div>
-												<div className="job-description">
-													<h5>
+												<JobDescription >
+													<JobTitle>
 														{job.title}
-													</h5>
-													<ul>
+													</JobTitle>
+													<JobLocation>
 														<li>
 
-															<Badge pill className="badge-time">
-																<FcOvertime />	{new Date(job.created_at).toLocaleDateString()}
+															<Badge pill >
+																<TimeIcon />	{new Date(job.created_at).toLocaleDateString()}
 															</Badge>
 														</li>
 														<li>
 
-															<Badge pill className="badge-location">
-																<GoLocation />	{job.location}
+															<Badge pill >
+																<LocIcon />	{job.location}
 															</Badge>
 														</li>
-													</ul>
+													</JobLocation>
 
-												</div>
+												</JobDescription>
 
-												<div>
-													<span className="view-btn">
+
+													<ClickButton >
 										Open Job
-													</span>
-												</div>
-											</Link>
-										</div>
-									</div>
+													</ClickButton>
+
+											</StyledLink>
+										</CardBox>
+									</Col>
 								))
 							}
 							{/* card smaple */}
-						</div>
+						</Row>
 						<Paginations />
-					</div>
-				</div>
+					</MainCard>
+				</MainBody>
 
 			</div>
-			{/* <div id="overlay">
 
-			<div/> */}
 		</>
 	);
 }

@@ -2,11 +2,20 @@ import React from 'react';
 import {
 	Pagination,
 } from 'react-bootstrap';
+import styled from 'styled-components';
+
+const StyledPagination = styled.div`
+display: flex;
+	justify-content: center;
+	padding-top: 8px;
+`;
+
+// const
 
 function Paginations() {
 	return (
 		<div>
-			<div className="pagination-part">
+			<StyledPagination>
 				<Pagination>
 					{/* <Pagination.First /> */}
 					{/* <Pagination.Prev /> */}
@@ -24,7 +33,7 @@ function Paginations() {
 					{/* <Pagination.Next /> */}
 					{/* <Pagination.Last /> */}
 				</Pagination>
-			</div>
+			</StyledPagination>
 		</div>
 	);
 }

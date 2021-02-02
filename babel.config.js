@@ -20,6 +20,7 @@ module.exports = function babelConfig(api) {
 					'~': './src',
 				},
 			}],
+			['babel-plugin-styled-components'],
 		],
 	};
 };
