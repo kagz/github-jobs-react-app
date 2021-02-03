@@ -7,9 +7,14 @@ import { FaSearchMinus, FaSearchPlus } from 'react-icons/fa';
 import client from '../client';
 import SearchJob from './SearchJob';
 import {
-	MainBody, Title, MainCard, MobileSearch, StyledPagination, CardBox, StyledLink, CompanyDetail,
-	CompanyLogo, JobDescription, JobTitle, JobLocation, TimeIcon, LocIcon, ClickButton,
-
+	MainBody, Title,
+	MainCard, MobileSearch,
+	StyledPagination, CardBox,
+	StyledLink, CompanyDetail,
+	CompanyLogo, JobDescription,
+	JobTitle, JobLocation,
+	TimeIcon, LocIcon,
+	ClickButton,
 } from './index.elements';
 
 const baseURL = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json';
