@@ -2,14 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import {
-	Badge, Button, Col, Container, Image, Pagination, Row,
+	Badge, Col, Container, Image, Pagination, Row,
 } from 'react-bootstrap';
-import { FaSearchMinus, FaSearchPlus } from 'react-icons/fa';
 import { FcOvertime } from 'react-icons/fc';
 import { GoLocation } from 'react-icons/go';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import cn from 'classnames';
 import client from '../client';
 import SearchJob from './SearchJob';
 
@@ -107,11 +105,6 @@ display: flex;
 justify-content: center;
 padding-top: 8px;
 `;
-const MobileSearch = styled.div`
-	display: flex;
-	justify-content: flex-end;
-
-`;
 
 function Home() {
 	const [jobs, setJobs] = useState(
@@ -147,7 +140,6 @@ function Home() {
 	useEffect(() => {
 		client.get(baseURL).then(setJobs);
 	}, []);
-	const [open, setOpen] = useState(false);
 	return (
 		<>
 			<Container>
@@ -155,27 +147,9 @@ function Home() {
 					<Title>Search For Developer Jobs</Title>
 					<MainCard>
 
-						<div className={cn(' form-wrapper', open && 'active')}>
+						<div className="d-none d-md-block">
 							<SearchJob />
 						</div>
-						<MobileSearch className="d-md-none">
-							<Button
-								onClick={() => setOpen(prevOpen => !prevOpen)}
-								variant="secondary"
-								size="sm"
-							>
-								{open ? <FaSearchMinus /> : <FaSearchPlus />}
-							</Button>
-						</MobileSearch>
-						<MobileSearch className="d-md-none">
-							<Button
-								onClick={() => setOpen(prevOpen => !prevOpen)}
-								variant="secondary"
-								size="sm"
-							>
-								{open ? <FaSearchMinus /> : <FaSearchPlus />}
-							</Button>
-						</MobileSearch>
 						<StyledPagination>
 							<Pagination>
 								{/* <Pagination.First /> */}
