@@ -1,17 +1,116 @@
 /* eslint-disable max-len */
-import React, { useState, useEffect } from 'react';
 
+import React, { useState, useEffect } from 'react';
 import {
-	Badge, Button, Image, Pagination,
+	Badge, Button, Col, Container, Image, Pagination, Row,
 } from 'react-bootstrap';
 import { FaSearchMinus, FaSearchPlus } from 'react-icons/fa';
 import { FcOvertime } from 'react-icons/fc';
 import { GoLocation } from 'react-icons/go';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import client from '../client';
 import SearchJob from './SearchJob';
 
 const baseURL = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json';
+
+const MainBody = styled.div`
+	color: #b7cbd9;
+	min-height: 100vh;
+	border-radius: 5px;
+`;
+
+const MainCard = styled.div`
+	padding: 20px;
+	border-radius: 5px;
+	background: #100e17;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+	margin: 7px;
+`;
+
+const Title = styled.h2`
+  font-size: 1.5em;
+  text-align: center;
+  color: #75062b;
+`;
+const CardBox = styled.div`
+background-color: #222121;
+padding: 20px;
+margin-bottom: 20px;
+width: 100%;
+border-radius: 5px;
+box-shadow: 5px 5px 10px rgba(27, 27, 27, 0.5);
+`;
+const StyledLink = styled(Link)`
+color: inherit;
+&:hover {
+	text-decoration: none;
+	color: inherit;
+}
+`;
+
+const CompanyDetail = styled.div`
+width: 100%;
+text-align: center;
+border-bottom: 1px solid #696565;
+margin-bottom: 3px;
+`;
+
+const CompanyLogo = styled(Image)`
+height: 98px;
+	width: 98px;
+`;
+const JobDescription = styled.div`
+display: flex;
+align-items: center;
+flex-direction: column;
+overflow: hidden;
+  text-overflow: ellipsis;
+`;
+const JobLocation = styled.ul`
+display: flex;
+padding: 0;
+list-style:none;
+`;
+
+const TimeIcon = styled(FcOvertime)`
+font-size: 20px;
+`;
+
+const LocIcon = styled(GoLocation)`
+font-size: 20px;
+`;
+
+const ClickButton = styled.span`
+	display: inline-block;
+	background: #044902;
+	padding: 0.45em 1em;
+	width: 100%;
+	text-align: center;
+	border-radius: 5px;
+	color: #fff;
+	font-weight: 500;
+	letter-spacing: 0.2px;
+	font-size: 17px;
+&:hover {
+	background: #097205;
+}
+`;
+
+const JobTitle = styled.h5`
+	color: #b5143d;
+    font-size: larger;
+`;
+const StyledPagination = styled.div`
+display: flex;
+justify-content: center;
+padding-top: 8px;
+`;
+const MobileSearch = styled.div`
+	display: flex;
+	justify-content: flex-end;
+
+`;
 
 function Home() {
 	const [jobs, setJobs] = useState(
@@ -50,24 +149,31 @@ function Home() {
 	const [open, setOpen] = useState(false);
 	return (
 		<>
-			<div className="container">
-				<div className="main-body">
-					<h2>Search For Developer Jobs</h2>
-					<div className="main-card">
+			<Container>
+				<MainBody>
+					<Title>Search For Developer Jobs</Title>
+					<MainCard>
 
 						<SearchJob />
-						<div className="mobile-search d-md-none">
+						<MobileSearch className="d-md-none">
 							<Button
 								onClick={() => setOpen(prevOpen => !prevOpen)}
 								variant="secondary"
 								size="sm"
 							>
-
 								{open ? <FaSearchMinus /> : <FaSearchPlus />}
-
 							</Button>
-						</div>
-						<div className="pagination-part">
+						</MobileSearch>
+						<MobileSearch className="d-md-none">
+							<Button
+								onClick={() => setOpen(prevOpen => !prevOpen)}
+								variant="secondary"
+								size="sm"
+							>
+								{open ? <FaSearchMinus /> : <FaSearchPlus />}
+							</Button>
+						</MobileSearch>
+						<StyledPagination>
 							<Pagination>
 								{/* <Pagination.First /> */}
 								{/* <Pagination.Prev /> */}
@@ -85,57 +191,51 @@ function Home() {
 								{/* <Pagination.Next /> */}
 								{/* <Pagination.Last /> */}
 							</Pagination>
-						</div>
-						<div className="job-card row">
-
+						</StyledPagination>
+						<Row>
 							{/* card smaple */}
 							{
 								jobs.map(job => (
-									<div className="col-lg-4 col-md-6 col-xs-12 " key={job.id}>
-										<div className="card-box">
-											<Link to={`/job/${job.id}`}>
+									<Col lg={4} md={6} xs={12} key={job.id}>
+										<CardBox>
+											<StyledLink to={`/job/${job.id}`}>
 												<div>
-													<div className="company-detail">
-														<Image src={job.company_logo} roundedCircle />
+													<CompanyDetail>
+														<CompanyLogo src={job.company_logo} roundedCircle />
 														<h6>
 															{job.company}
 														</h6>
-													</div>
+													</CompanyDetail>
 												</div>
-												<div className="job-description">
-													<h5>
+												<JobDescription>
+													<JobTitle>
 														{job.title}
-													</h5>
-													<ul>
+													</JobTitle>
+													<JobLocation>
 														<li>
-
-															<Badge pill className="badge-time">
-																<FcOvertime />	{new Date(job.created_at).toLocaleDateString()}
+															<Badge pill>
+																<TimeIcon />	{new Date(job.created_at).toLocaleDateString()}
 															</Badge>
 														</li>
 														<li>
-
-															<Badge pill className="badge-location">
-																<GoLocation />	{job.location}
+															<Badge pill>
+																<LocIcon />	{job.location}
 															</Badge>
 														</li>
-													</ul>
-
-												</div>
-
-												<div>
-													<span className="view-btn">
+													</JobLocation>
+												</JobDescription>
+												<ClickButton>
 										Open Job
-													</span>
-												</div>
-											</Link>
-										</div>
-									</div>
+												</ClickButton>
+
+											</StyledLink>
+										</CardBox>
+									</Col>
 								))
 							}
 							{/* card smaple */}
-						</div>
-						<div className="pagination-part">
+						</Row>
+						<StyledPagination>
 							<Pagination>
 								{/* <Pagination.First /> */}
 								{/* <Pagination.Prev /> */}
@@ -153,11 +253,11 @@ function Home() {
 								{/* <Pagination.Next /> */}
 								{/* <Pagination.Last /> */}
 							</Pagination>
-						</div>
-					</div>
-				</div>
+						</StyledPagination>
+					</MainCard>
+				</MainBody>
 
-			</div>
+			</Container>
 
 		</>
 	);

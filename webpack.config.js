@@ -87,6 +87,9 @@ const base = {
 			},
 		],
 	},
+	devServer: {
+		historyApiFallback: true,
+	},
 	plugins: [
 		new HtmlPlugin({ template: path.resolve('src/template.html') }),
 		new MiniCssExtractPlugin(),
