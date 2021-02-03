@@ -9,6 +9,7 @@ import { FcOvertime } from 'react-icons/fc';
 import { GoLocation } from 'react-icons/go';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import cn from 'classnames';
 import client from '../client';
 import SearchJob from './SearchJob';
 
@@ -154,7 +155,9 @@ function Home() {
 					<Title>Search For Developer Jobs</Title>
 					<MainCard>
 
-						<SearchJob />
+						<div className={cn(' form-wrapper', open && 'active')}>
+							<SearchJob />
+						</div>
 						<MobileSearch className="d-md-none">
 							<Button
 								onClick={() => setOpen(prevOpen => !prevOpen)}
