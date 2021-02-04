@@ -10,7 +10,7 @@ function Header() {
 	const showSidebar = () => setSidebar(!sidebar);
 	return (
 		<div>
-			<Navbar expand="lg" bg="dark" variant="dark">
+			<Navbar expand="lg" fixed="top" bg="dark" variant="dark" >
 				<Navbar.Brand href="/">Git Jobs</Navbar.Brand>
 				<Button
 					className="d-md-none"
@@ -22,7 +22,7 @@ function Header() {
 				</Button>
 			</Navbar>
 			<Nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-				<ul className="nav-menu-items" onClick={showSidebar} onKeyDown={showSidebar}>
+				<ul className="nav-menu-items">
 					<SearchJob />
 				</ul>
 			</Nav>
