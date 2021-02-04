@@ -40,7 +40,7 @@ export const StyledLink = styled(Link)`
 	&:hover {
 		text-decoration: none;
 		color: inherit;
-}
+	}
 `;
 
 export const CompanyDetail = styled.div`
@@ -88,9 +88,9 @@ export const ClickButton = styled.span`
 	font-weight: 500;
 	letter-spacing: 0.2px;
 	font-size: 17px;
-&:hover {
-	background: #097205;
-}
+	&:hover {
+		background: #097205;
+	}
 `;
 
 export const JobTitle = styled.h5`
