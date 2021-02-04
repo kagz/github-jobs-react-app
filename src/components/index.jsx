@@ -1,15 +1,21 @@
 /* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
-
 import {
-	Badge, Button, Image, Pagination,
+	Badge, Button, Col, Container, Pagination, Row,
 } from 'react-bootstrap';
 import { FaSearchMinus, FaSearchPlus } from 'react-icons/fa';
-import { FcOvertime } from 'react-icons/fc';
-import { GoLocation } from 'react-icons/go';
-import { Link } from 'react-router-dom';
 import client from '../client';
 import SearchJob from './SearchJob';
+import {
+	MainBody, Title,
+	MainCard, MobileSearch,
+	StyledPagination, CardBox,
+	StyledLink, CompanyDetail,
+	CompanyLogo, JobDescription,
+	JobTitle, JobLocation,
+	TimeIcon, LocIcon,
+	ClickButton,
+} from './index.elements';
 
 const baseURL = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json';
 
@@ -50,24 +56,31 @@ function Home() {
 	const [open, setOpen] = useState(false);
 	return (
 		<>
-			<div className="container">
-				<div className="main-body">
-					<h2>Search For Developer Jobs</h2>
-					<div className="main-card">
+			<Container>
+				<MainBody>
+					<Title>Search For Developer Jobs</Title>
+					<MainCard>
 
 						<SearchJob />
-						<div className="mobile-search d-md-none">
+						<MobileSearch className="d-md-none">
 							<Button
 								onClick={() => setOpen(prevOpen => !prevOpen)}
 								variant="secondary"
 								size="sm"
 							>
-
 								{open ? <FaSearchMinus /> : <FaSearchPlus />}
-
 							</Button>
-						</div>
-						<div className="pagination-part">
+						</MobileSearch>
+						<MobileSearch className="d-md-none">
+							<Button
+								onClick={() => setOpen(prevOpen => !prevOpen)}
+								variant="secondary"
+								size="sm"
+							>
+								{open ? <FaSearchMinus /> : <FaSearchPlus />}
+							</Button>
+						</MobileSearch>
+						<StyledPagination>
 							<Pagination>
 								{/* <Pagination.First /> */}
 								{/* <Pagination.Prev /> */}
@@ -85,57 +98,51 @@ function Home() {
 								{/* <Pagination.Next /> */}
 								{/* <Pagination.Last /> */}
 							</Pagination>
-						</div>
-						<div className="job-card row">
-
+						</StyledPagination>
+						<Row>
 							{/* card smaple */}
 							{
 								jobs.map(job => (
-									<div className="col-lg-4 col-md-6 col-xs-12 " key={job.id}>
-										<div className="card-box">
-											<Link to={`/job/${job.id}`}>
+									<Col lg={4} md={6} xs={12} key={job.id}>
+										<CardBox>
+											<StyledLink to={`/job/${job.id}`}>
 												<div>
-													<div className="company-detail">
-														<Image src={job.company_logo} roundedCircle />
+													<CompanyDetail>
+														<CompanyLogo src={job.company_logo} roundedCircle />
 														<h6>
 															{job.company}
 														</h6>
-													</div>
+													</CompanyDetail>
 												</div>
-												<div className="job-description">
-													<h5>
+												<JobDescription>
+													<JobTitle>
 														{job.title}
-													</h5>
-													<ul>
+													</JobTitle>
+													<JobLocation>
 														<li>
-
-															<Badge pill className="badge-time">
-																<FcOvertime />	{new Date(job.created_at).toLocaleDateString()}
+															<Badge pill>
+																<TimeIcon />	{new Date(job.created_at).toLocaleDateString()}
 															</Badge>
 														</li>
 														<li>
-
-															<Badge pill className="badge-location">
-																<GoLocation />	{job.location}
+															<Badge pill>
+																<LocIcon />	{job.location}
 															</Badge>
 														</li>
-													</ul>
-
-												</div>
-
-												<div>
-													<span className="view-btn">
+													</JobLocation>
+												</JobDescription>
+												<ClickButton>
 										Open Job
-													</span>
-												</div>
-											</Link>
-										</div>
-									</div>
+												</ClickButton>
+
+											</StyledLink>
+										</CardBox>
+									</Col>
 								))
 							}
 							{/* card smaple */}
-						</div>
-						<div className="pagination-part">
+						</Row>
+						<StyledPagination>
 							<Pagination>
 								{/* <Pagination.First /> */}
 								{/* <Pagination.Prev /> */}
@@ -153,11 +160,11 @@ function Home() {
 								{/* <Pagination.Next /> */}
 								{/* <Pagination.Last /> */}
 							</Pagination>
-						</div>
-					</div>
-				</div>
+						</StyledPagination>
+					</MainCard>
+				</MainBody>
 
-			</div>
+			</Container>
 
 		</>
 	);
