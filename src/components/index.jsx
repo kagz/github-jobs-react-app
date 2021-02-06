@@ -1,14 +1,14 @@
 /* eslint-disable max-len */
+
 import React, { useState, useEffect } from 'react';
 import {
-	Badge, Button, Col, Container, Pagination, Row,
+	Badge, Col, Container, Pagination, Row,
 } from 'react-bootstrap';
-import { FaSearchMinus, FaSearchPlus } from 'react-icons/fa';
 import client from '../client';
 import SearchJob from './SearchJob';
 import {
 	MainBody, Title,
-	MainCard, MobileSearch,
+	MainCard,
 	StyledPagination, CardBox,
 	StyledLink, CompanyDetail,
 	CompanyLogo, JobDescription,
@@ -53,33 +53,15 @@ function Home() {
 	useEffect(() => {
 		client.get(baseURL).then(setJobs);
 	}, []);
-	const [open, setOpen] = useState(false);
 	return (
 		<>
 			<Container>
 				<MainBody>
 					<Title>Search For Developer Jobs</Title>
 					<MainCard>
-
-						<SearchJob />
-						<MobileSearch className="d-md-none">
-							<Button
-								onClick={() => setOpen(prevOpen => !prevOpen)}
-								variant="secondary"
-								size="sm"
-							>
-								{open ? <FaSearchMinus /> : <FaSearchPlus />}
-							</Button>
-						</MobileSearch>
-						<MobileSearch className="d-md-none">
-							<Button
-								onClick={() => setOpen(prevOpen => !prevOpen)}
-								variant="secondary"
-								size="sm"
-							>
-								{open ? <FaSearchMinus /> : <FaSearchPlus />}
-							</Button>
-						</MobileSearch>
+						<div className="d-none d-md-block">
+							<SearchJob />
+						</div>
 						<StyledPagination>
 							<Pagination>
 								{/* <Pagination.First /> */}
@@ -169,5 +151,4 @@ function Home() {
 		</>
 	);
 }
-
 export default Home;

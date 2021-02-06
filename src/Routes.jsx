@@ -5,15 +5,12 @@ import JobDetail from './components/pages/JobDetail';
 
 function Routes() {
 	return (
-
 		<Router>
 			<Switch>
 				<Route path="/" exact component={Home} />
 				<Route path="/job/:id" exact component={JobDetail} />
 			</Switch>
-
 		</Router>
-
 	);
 }
 

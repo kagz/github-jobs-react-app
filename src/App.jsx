@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import GlobalStyle from './GlobalStyle';
@@ -8,12 +9,14 @@ function App() {
 	return (
 		<>
 			<GlobalStyle />
-			<Header />
-			<Routes />
-			<Footer />
+			<Router>
+				<Header />
+				<Routes />
+				<Footer />
+
+			</Router>
 
 		</>
 	);
 }
-
 export default App;
