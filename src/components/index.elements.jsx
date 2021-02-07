@@ -139,3 +139,5 @@ export const StyledFormLabel = styled(Form.Label)`
 	justify-content: center;
 	margin: 0;
 `;
+
+// job details

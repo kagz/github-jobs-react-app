@@ -87,7 +87,7 @@ function Home() {
 								jobs.map(job => (
 									<Col lg={4} md={6} xs={12} key={job.id}>
 										<CardBox>
-											<StyledLink to={`/job/${job.id}`}>
+											<StyledLink to={`/${job.id}`}>
 												<div>
 													<CompanyDetail>
 														<CompanyLogo src={job.company_logo} roundedCircle />
