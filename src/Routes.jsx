@@ -8,7 +8,7 @@ function Routes() {
 		<Router>
 			<Switch>
 				<Route path="/" exact component={Home} />
-				<Route path="/:id" exact component={JobDetail} />
+				<Route path="/:jobId" exact component={JobDetail} />
 			</Switch>
 		</Router>
 	);

@@ -89,6 +89,13 @@ const base = {
 	},
 	devServer: {
 		historyApiFallback: true,
+		// proxy: {
+		// 	'/api': {
+		// 		target: 'https://jobs.github.com',
+		// 		secure: false,
+		// 		pathRewrite: { '^/api': '' },
+		// 	},
+		// },
 	},
 	plugins: [
 		new HtmlPlugin({ template: path.resolve('src/template.html') }),

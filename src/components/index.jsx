@@ -17,7 +17,7 @@ import {
 	ClickButton,
 } from './index.elements';
 
-const baseURL = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json';
+const baseURL = 'http://localhost:8010/proxy';
 
 function Home() {
 	const [jobs, setJobs] = useState(
@@ -51,7 +51,7 @@ function Home() {
 		],
 	);
 	useEffect(() => {
-		client.get(baseURL).then(setJobs);
+		client.get(`${baseURL}.json`).then(setJobs);
 	}, []);
 	return (
 		<>
@@ -114,7 +114,7 @@ function Home() {
 													</JobLocation>
 												</JobDescription>
 												<ClickButton>
-										Open Job
+													Open Job
 												</ClickButton>
 
 											</StyledLink>

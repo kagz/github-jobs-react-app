@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const client = axios.create({
-	// baseURL: 'https://jobs.github.com',
+	// baseURL: '/api',
 	headers: {
 		Accepts: 'application/json',
 		'Content-Type': 'application/json',
