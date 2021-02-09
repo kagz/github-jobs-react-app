@@ -3,7 +3,6 @@ import { Badge, Card, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
-import { renderMarkup } from 'react-render-markup';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import client from '../../client';
 
@@ -76,7 +75,7 @@ function JobDetail() {
 								</JobType>
 							</Card.Subtitle>
 							<div>
-								{renderMarkup(job.description)}
+								<div dangerouslySetInnerHTML={{ __html: job.description }} />
 							</div>
 						</Card.Body>
 						<Card.Footer className="text-muted ">
