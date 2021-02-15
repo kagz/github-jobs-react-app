@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import {
 	Badge,
 	Col,
@@ -12,7 +13,6 @@ import client from '../client';
 import SearchJob from './SearchJob';
 import {
 	MainBody, Title,
-	MainCard,
 	StyledPagination, CardBox,
 	StyledLink, CompanyDetail,
 	CompanyLogo, JobDescription,
@@ -20,6 +20,14 @@ import {
 	TimeIcon, LocIcon,
 	ClickButton,
 } from './index.elements';
+
+const MainCard = styled.div`
+	padding: 20px;
+	border-radius: 5px;
+	background: #100e17;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+	margin: 7px;
+`;
 
 function Home() {
 	const [jobs, setJobs] = useState(null);

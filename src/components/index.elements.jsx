@@ -10,14 +10,6 @@ export const MainBody = styled.div`
 	border-radius: 5px;
 `;
 
-export const MainCard = styled.div`
-	padding: 20px;
-	border-radius: 5px;
-	background: #100e17;
-	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-	margin: 7px;
-`;
-
 export const Title = styled.h2`
   font-size: 1.5em;
   text-align: center;
