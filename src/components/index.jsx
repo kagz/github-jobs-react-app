@@ -46,7 +46,7 @@ function Home() {
 				howToApply: how_to_apply,
 				companyLogo: company_logo,
 				url: new URL(url),
-				companyUrl: new URL(company_url),
+				companyUrl: company_url ? new URL(company_url) : null,
 				createdAt: new Date(created_at),
 			})))
 			.then(setJobs);
