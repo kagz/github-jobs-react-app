@@ -2,7 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import {
-	Badge, Col, Container, Pagination, Row,
+	Badge,
+	Col,
+	Container,
+	Pagination,
+	Row,
 } from 'react-bootstrap';
 import client from '../client';
 import SearchJob from './SearchJob';
@@ -50,9 +54,11 @@ function Home() {
 			},
 		],
 	);
+
 	useEffect(() => {
-		client.get(baseURL).then(setJobs);
+		client.get('/positions.json').then(setJobs);
 	}, []);
+
 	return (
 		<>
 			<Container>
