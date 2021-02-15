@@ -26,7 +26,22 @@ function Home() {
 
 	useEffect(() => {
 		client.get('/positions.json')
-			.then(res => setJobs(res.data));
+			.then(res => res.data.map(({
+				url,
+				company_url,
+				created_at,
+				how_to_apply,
+				company_logo,
+				...job
+			}) => ({
+				...job,
+				howToApply: how_to_apply,
+				companyLogo: company_logo,
+				url: new URL(url),
+				companyUrl: new URL(company_url),
+				createdAt: new Date(created_at),
+			})))
+			.then(setJobs);
 	}, []);
 
 	if (jobs === null) return <p>Loading...</p>;
