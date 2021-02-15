@@ -6,6 +6,7 @@
   "scripts": {
     "ngrok": "ngrok http 8080 -host-header=\"localhost:8080\"",
     "start": "NODE_ENV=development webpack-dev-server  --env=development ",
+    "proxy": "lcp --proxyUrl https://jobs.github.com/positions",
     "build": "NODE_ENV=production webpack --env=production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +22,8 @@
     "bootstrap": "^4.5.2",
     "classnames": "^2.2.6",
     "core-js": "^3.6.5",
+    "dayjs": "^1.10.4",
+    "local-cors-proxy": "^1.1.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.3.0",
