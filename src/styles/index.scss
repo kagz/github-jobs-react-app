@@ -1,28 +1,44 @@
 @import "bootstrap";
-.page-link,
-.page-item:first-child .page-link,
-.page-item:last-child .page-link {
-	width: 40px;
+.container{
 	display: flex;
-	height: 40px;
-	color: #bf8c4f;
-	background-color: #262727;
-	line-height: 40px;
-	border-radius: 100%;
-	padding: 0;
-	position: relative;
-	justify-content: center;
-	align-items: center;
-	border: 3px solid #2ecc71;
-}
-.page-link:hover {
-	z-index: 2;
-	color: #cdd6e0;
-	text-decoration: none;
-	background-color: #343a40;
-	border: 3px solid #2ecc71;
+	list-style: none;
 }
 
+.page{
+padding: 10px;
+	border: 1px solid #dcdcdc;
+	border-radius: 6px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.disabled{
+	cursor: not-allowed;
+
+}
+
+.active{
+border: 2px solid #000;
+	font-weight: bold;
+}
+
+.previous{
+	padding: 10px;
+	border-radius: 6px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.break{
+	padding: 10px;
+}
+
+.next{
+	padding: 10px;
+	border-radius: 6px;
+	margin-right: 10px;
+	cursor: pointer;
+}
 // shity trials menu
 .nav-menu {
 	// background-color: #19191a;

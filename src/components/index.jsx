@@ -6,20 +6,20 @@ import {
 	Badge,
 	Col,
 	Container,
-	Pagination,
 	Row,
 } from 'react-bootstrap';
 import client from '../client';
 import SearchJob from './SearchJob';
 import {
 	MainBody, Title,
-	StyledPagination, CardBox,
+	CardBox,
 	StyledLink, CompanyDetail,
 	CompanyLogo, JobDescription,
 	JobTitle, JobLocation,
 	TimeIcon, LocIcon,
 	ClickButton,
 } from './index.elements';
+import CustomPagination from './CustomPagination';
 
 const MainCard = styled.div`
 	padding: 20px;
@@ -31,30 +31,36 @@ const MainCard = styled.div`
 
 function Home() {
 	const [jobs, setJobs] = useState(null);
-
-	useEffect(() => {
-		client.get('/positions.json')
-			.then(res => res.data.map(({
-				url,
-				company_url,
-				created_at,
-				how_to_apply,
-				company_logo,
-				...job
-			}) => ({
-				...job,
-				howToApply: how_to_apply,
-				companyLogo: company_logo,
-				url: new URL(url),
-				companyUrl: company_url ? new URL(company_url) : null,
-				createdAt: new Date(created_at),
-			})))
-			.then(setJobs);
-	}, []);
+	const [pageCount, setPageCount] = useState(1);
+	const [currentPage, setcurrentPage] = useState(0);
 
 	if (jobs === null) return <p>Loading...</p>;
 	if (!jobs.length) return <p>There are no jobs...</p>;
 
+	const handlePageChange = selectedObject => {
+		setcurrentPage(selectedObject.selected);
+		// use effect stuff
+		useEffect(() => {
+			client.get('/positions.json', { params: { page: currentPage } })
+				.then(res => res.data.map(({
+					url,
+					company_url,
+					created_at,
+					how_to_apply,
+					company_logo,
+					...job
+				}) => ({
+					// setPageCount: res.data.length !== 0, ==>here how do i set my page count to use results length?? setPageCount(res.data.length ) is not working
+					...job,
+					howToApply: how_to_apply,
+					companyLogo: company_logo,
+					url: new URL(url),
+					companyUrl: company_url ? new URL(company_url) : null,
+					createdAt: new Date(created_at).toLocaleDateString(),
+				})))
+				.then(setJobs);
+		}, []);
+	};
 	return (
 		<>
 			<Container>
@@ -64,25 +70,7 @@ function Home() {
 						<div className="d-none d-md-block">
 							<SearchJob />
 						</div>
-						<StyledPagination>
-							<Pagination>
-								{/* <Pagination.First /> */}
-								{/* <Pagination.Prev /> */}
-								{/* <Pagination.Item>{1}</Pagination.Item> */}
-								{/* <Pagination.Ellipsis /> */}
-								<Pagination.Item>{1}</Pagination.Item>
-								<Pagination.Item>{2}</Pagination.Item>
-								<Pagination.Item>{3}</Pagination.Item>
-								<Pagination.Item>{4}</Pagination.Item>
-
-								{/* <Pagination.Item active>{12}</Pagination.Item> */}
-								<Pagination.Item>{5}</Pagination.Item>
-								{/* <Pagination.Ellipsis /> */}
-								{/* <Pagination.Item>{20}</Pagination.Item> */}
-								{/* <Pagination.Next /> */}
-								{/* <Pagination.Last /> */}
-							</Pagination>
-						</StyledPagination>
+						<CustomPagination pageCount={pageCount} handlePageChange={handlePageChange} />
 						<Row>
 							{/* card smaple */}
 							{
@@ -95,7 +83,7 @@ function Home() {
 												<StyledLink to={`/${job.id}`}>
 													<div>
 														<CompanyDetail>
-															<CompanyLogo src={job.company_logo} roundedCircle />
+															<CompanyLogo src={job.companyLogo} roundedCircle />
 															<h6>
 																{job.company}
 															</h6>
@@ -108,7 +96,7 @@ function Home() {
 														<JobLocation>
 															<li>
 																<Badge pill>
-																	<TimeIcon />	{new Date(job.created_at).toLocaleDateString()}
+																	<TimeIcon />	{job.createdAt}
 																</Badge>
 															</li>
 															<li>
@@ -129,25 +117,7 @@ function Home() {
 							}
 							{/* card smaple */}
 						</Row>
-						<StyledPagination>
-							<Pagination>
-								{/* <Pagination.First /> */}
-								{/* <Pagination.Prev /> */}
-								{/* <Pagination.Item>{1}</Pagination.Item> */}
-								{/* <Pagination.Ellipsis /> */}
-								<Pagination.Item>{1}</Pagination.Item>
-								<Pagination.Item>{2}</Pagination.Item>
-								<Pagination.Item>{3}</Pagination.Item>
-								<Pagination.Item>{4}</Pagination.Item>
-
-								{/* <Pagination.Item active>{12}</Pagination.Item> */}
-								<Pagination.Item>{5}</Pagination.Item>
-								{/* <Pagination.Ellipsis /> */}
-								{/* <Pagination.Item>{20}</Pagination.Item> */}
-								{/* <Pagination.Next /> */}
-								{/* <Pagination.Last /> */}
-							</Pagination>
-						</StyledPagination>
+						<CustomPagination pageCount={pageCount} handlePageChange={handlePageChange} />
 					</MainCard>
 				</MainBody>
 
