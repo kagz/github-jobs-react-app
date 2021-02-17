@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 body {
-	padding-top:70px;
+	padding-top:50px;
 	background-color: #1f1f20;
 	color: white;
 	/* min-height:100vh; */

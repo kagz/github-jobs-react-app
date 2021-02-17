@@ -12,7 +12,7 @@ import client from '../client';
 import SearchJob from './SearchJob';
 import {
 	MainBody, Title,
-	CardBox,
+	CardBox, StyledPagination,
 	StyledLink, CompanyDetail,
 	CompanyLogo, JobDescription,
 	JobTitle, JobLocation,
@@ -71,7 +71,10 @@ function Home() {
 						<div className="d-none d-md-block">
 							<SearchJob />
 						</div>
-						<CustomPagination pageCount={pageCount} handlePageChange={handlePageChange} />
+						<StyledPagination>
+							<CustomPagination pageCount={pageCount} handlePageChange={handlePageChange} />
+						</StyledPagination>
+
 						<Row>
 							{/* card smaple */}
 							{
@@ -118,7 +121,9 @@ function Home() {
 							}
 							{/* card smaple */}
 						</Row>
-						<CustomPagination pageCount={pageCount} handlePageChange={handlePageChange} />
+						<StyledPagination>
+							<CustomPagination pageCount={pageCount} handlePageChange={handlePageChange} />
+						</StyledPagination>
 					</MainCard>
 				</MainBody>
 
