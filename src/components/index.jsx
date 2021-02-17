@@ -34,33 +34,34 @@ function Home() {
 	const [pageCount, setPageCount] = useState(1);
 	const [currentPage, setcurrentPage] = useState(0);
 
-	if (jobs === null) return <p>Loading...</p>;
-	if (!jobs.length) return <p>There are no jobs...</p>;
-
 	const handlePageChange = selectedObject => {
 		setcurrentPage(selectedObject.selected);
 		// use effect stuff
-		useEffect(() => {
-			client.get('/positions.json', { params: { page: currentPage } })
-				.then(res => res.data.map(({
-					url,
-					company_url,
-					created_at,
-					how_to_apply,
-					company_logo,
-					...job
-				}) => ({
-					// setPageCount: res.data.length !== 0, ==>here how do i set my page count to use results length?? setPageCount(res.data.length ) is not working
-					...job,
-					howToApply: how_to_apply,
-					companyLogo: company_logo,
-					url: new URL(url),
-					companyUrl: company_url ? new URL(company_url) : null,
-					createdAt: new Date(created_at).toLocaleDateString(),
-				})))
-				.then(setJobs);
-		}, []);
 	};
+
+	useEffect(() => {
+		client.get('/positions.json', { params: { page: currentPage } })
+			.then(res => res.data.map(({
+				url,
+				company_url,
+				created_at,
+				how_to_apply,
+				company_logo,
+				...job
+			}) => ({
+				// setPageCount: res.data.length !== 0, ==>here how do i set my page count to use results length?? setPageCount(res.data.length ) is not working
+				...job,
+				howToApply: how_to_apply,
+				companyLogo: company_logo,
+				url: new URL(url),
+				companyUrl: company_url ? new URL(company_url) : null,
+				createdAt: new Date(created_at).toLocaleDateString(),
+			})))
+			.then(setJobs);
+	}, []);
+	if (jobs === null) return <p>Loading...</p>;
+	if (!jobs.length) return <p>There are no jobs...</p>;
+
 	return (
 		<>
 			<Container>
