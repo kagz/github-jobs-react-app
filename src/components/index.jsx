@@ -31,7 +31,7 @@ const MainCard = styled.div`
 
 function Home() {
 	const [jobs, setJobs] = useState(null);
-	const [pageCount, setPageCount] = useState(1);
+	const [pageCount, setPageCount] = useState(3);
 	const [currentPage, setcurrentPage] = useState(0);
 
 	const handlePageChange = selectedObject => {
@@ -58,7 +58,7 @@ function Home() {
 				createdAt: new Date(created_at).toLocaleDateString(),
 			})))
 			.then(setJobs);
-	}, []);
+	}, [currentPage]);
 	if (jobs === null) return <p>Loading...</p>;
 	if (!jobs.length) return <p>There are no jobs...</p>;
 
