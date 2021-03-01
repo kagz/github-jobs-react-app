@@ -29,7 +29,8 @@ const MainCard = styled.div`
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 	margin: 7px;
 `;
-const LoadMore = styled(Button)`
+
+const LoadMoreButton = styled(Button)`
 	margin-right: auto;
 	margin-left: auto;
 	display:block;
@@ -104,9 +105,9 @@ function Home() {
 						<div className="d-none d-md-block">
 							<SearchJob />
 						</div>
-						<LoadMore disabled={isLoading || hasMore} onClick={loadPage}>
+						<LoadMoreButton disabled={isLoading || hasMore} onClick={loadPage}>
 							Load More
-						</LoadMore>
+						</LoadMoreButton>
 						<Row>
 							{/* card smaple */}
 							{
@@ -151,9 +152,9 @@ function Home() {
 							}
 							{/* card smaple */}
 						</Row>
-						<LoadMore disabled={isLoading || hasMore} onClick={loadPage}>
+						<LoadMoreButton disabled={isLoading || hasMore} onClick={loadPage}>
 							Load More
-						</LoadMore>
+						</LoadMoreButton>
 					</MainCard>
 				</MainBody>
 			</Container>

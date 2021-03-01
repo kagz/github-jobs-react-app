@@ -1,45 +1,44 @@
 @import "bootstrap";
-.container{
+.container {
 	display: flex;
 	list-style: none;
 }
 
-.page{
-padding: 10px;
+.page {
+	padding: 10px;
 	border: 1px solid #dcdcdc;
 	border-radius: 6px;
 	margin-right: 10px;
 	cursor: pointer;
 }
 
-.disabled{
+.disabled {
 	cursor: not-allowed;
-
 }
 
-.active{
-border: 2px solid #000;
+.active {
+	border: 2px solid #000;
 	font-weight: bold;
 }
 
-.previous{
+.previous {
 	padding: 10px;
 	border-radius: 6px;
 	margin-right: 10px;
 	cursor: pointer;
 }
 
-.break{
+.break {
 	padding: 10px;
 }
 
-.next{
+.next {
 	padding: 10px;
 	border-radius: 6px;
 	margin-right: 10px;
 	cursor: pointer;
 }
-// shity trials menu
+
 .nav-menu {
 	// background-color: #19191a;
 	width: 100%;
@@ -52,7 +51,7 @@ border: 2px solid #000;
 	transition: 850ms;
 	color: rgb(226, 235, 226);
 	margin-top: 55px;
-  background-color: rgba(21, 30, 39, 1);
+	background-color: rgba(21, 30, 39, 1);
 	box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5), 0px 2px 2px 0px rgba(12, 12, 12, 0.5);
 	z-index: 1001;
 	&.active {
