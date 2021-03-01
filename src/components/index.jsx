@@ -13,7 +13,7 @@ import client from '../client';
 import SearchJob from './SearchJob';
 import {
 	MainBody, Title,
-	CardBox, 	StyledLink, CompanyDetail,
+	CardBox, StyledLink, CompanyDetail,
 	CompanyLogo, JobDescription,
 	JobTitle, JobLocation,
 	TimeIcon, LocIcon,
@@ -61,7 +61,6 @@ function Home() {
 	async function loadPage() {
 		if (isLoading) return;
 		setIsLoading(true);
-
 		return client.get('/positions.json', {
 			params: { page: Math.ceil(jobs.length / JOBS_PER_PAGE) },
 		})
@@ -105,17 +104,14 @@ function Home() {
 						<div className="d-none d-md-block">
 							<SearchJob />
 						</div>
-
 						<LoadMore disabled={isLoading || hasMore} onClick={loadPage}>
-				Load More
+							Load More
 						</LoadMore>
-
 						<Row>
 							{/* card smaple */}
 							{
 								!jobs ? (
 									<p>loading..stuffs....</p>)
-
 									: jobs.map(job => (
 										<Col lg={4} md={6} xs={12} key={job.id}>
 											<CardBox>
@@ -146,9 +142,8 @@ function Home() {
 														</JobLocation>
 													</JobDescription>
 													<ClickButton>
-													Open Job
+														Open Job
 													</ClickButton>
-
 												</StyledLink>
 											</CardBox>
 										</Col>
@@ -156,16 +151,12 @@ function Home() {
 							}
 							{/* card smaple */}
 						</Row>
-
 						<LoadMore disabled={isLoading || hasMore} onClick={loadPage}>
-				Load More
+							Load More
 						</LoadMore>
-
 					</MainCard>
 				</MainBody>
-
 			</Container>
-
 		</>
 	);
 }
