@@ -8,6 +8,7 @@ export const MainBody = styled.div`
 	color: #b7cbd9;
 	min-height: 100vh;
 	border-radius: 5px;
+	width:100%;
 `;
 
 export const Title = styled.h2`
@@ -57,6 +58,7 @@ export const JobLocation = styled.ul`
 	display: flex;
 	padding: 0;
 	list-style:none;
+	justify-content:space-between;
 `;
 
 export const TimeIcon = styled(FcOvertime)`
