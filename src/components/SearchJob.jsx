@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form } from 'react-bootstrap';
 import {
 	StyledForm,
@@ -7,44 +7,29 @@ import {
 
 function SearchJob(props) {
 	const { onSearch } = props;
-	const [location, setLocation] = useState('');
-	const [fulltime, setFulltime] = useState(true);
-	const handleLocationChange = e => {
-		setLocation(e.target.value);
-	};
-	const handleFulltimeChange = () => {
-		setFulltime(!fulltime);
-	};
-	const handleEnterKeyPressed = e => {
-		if (e.key === 'Enter') {
-			onSearch({ location, fulltime });
-			console.log('LOGZZZ', { location, fulltime });
-		}
-	};
+	const onSubmit = data => onSearch(data);
 	return (
 		<StyledForm>
 			<Form.Group>
 				<StyledFormLabel>Location</StyledFormLabel>
 				<StyledFormControl
 					name="location"
-					onChange={handleLocationChange}
 					type="text"
-					value={location}
-					onKeyPress={handleEnterKeyPressed}
+					onChange={e => onSubmit(e.target.value)}
 				/>
 			</Form.Group>
-			<Form.Group>
+			{/* <Form.Group>
 				<StyledFormLabel>Type</StyledFormLabel>
 				<div className="text-center">
 					<Form.Check
 						label="Full Time"
 						type="checkbox"
-						onChange={handleFulltimeChange}
+						defaultValue="true"
 						name="full_time"
-						id="full_time"
+						onChange={e => onSubmit(e.target.value)}
 					/>
 				</div>
-			</Form.Group>
+			</Form.Group> */}
 		</StyledForm>
 	);
 }

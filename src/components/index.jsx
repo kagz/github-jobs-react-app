@@ -43,13 +43,14 @@ dayjs.extend(relativeTime);
 function Home() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [hasMore, setHasMore] = useState(false);
-	const [jobs, setJobs] = useState([]);
-
-	const onSearch = async param => {
+	const [allJobs, setAllJobs] = useState([]);
+	const [sortedJobs, setSortedJobs] = useState([]);
+	const [searchTerm, setSearchTerm] = useState('');
+	async function getJobs() {
 		if (isLoading) return;
 		setIsLoading(true);
 		return client.get('/positions.json', {
-			params: { page: Math.ceil(jobs.length / JOBS_PER_PAGE), location: param?.location, ...param },
+			params: { page: Math.ceil(allJobs.length / JOBS_PER_PAGE) },
 		})
 			.then(res => res.data.map(({
 				url,
@@ -65,7 +66,7 @@ function Home() {
 				url: new URL(url),
 				createdAt: new Date(created_at),
 			})))
-			.then(setJobs)
+			.then(setAllJobs)
 			.catch(error => {
 				if (error.response.status === 404) setHasMore(false);
 				else return Promise.reject(error);
@@ -73,12 +74,19 @@ function Home() {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	};
+	}
+	const onSearch = async term => setSearchTerm(term);
 
 	useEffect(() => {
-		onSearch();
+		getJobs();
 	}, []);
 
+	// how can i use two fields to filter these guys??
+	useEffect(() => {
+		setSortedJobs(
+			allJobs.filter(hustle => hustle.location.toLowerCase().includes(searchTerm.toLowerCase())),
+		);
+	}, [searchTerm, allJobs]);
 
 	return (
 		<Container>
@@ -88,17 +96,17 @@ function Home() {
 					<div className="d-none d-md-block">
 						<SearchJob onSearch={onSearch} />
 					</div>
-					<LoadMoreButton disabled={isLoading || hasMore} onClick={onSearch}>
-							Load More
+					<LoadMoreButton disabled={isLoading || hasMore} onClick={getJobs}>
+						Load More
 					</LoadMoreButton>
 					<Row>
-						{/* card smaple */}
+						{/* card sample */}
 						{
 							// eslint-disable-next-line no-nested-ternary
 							isLoading ? (<p>Loadingzzz...</p>)
-								: !jobs.length ? (
+								: !sortedJobs.length ? (
 									<p>No Jobs Niggaa!!</p>)
-									: jobs.map(job => (
+									: sortedJobs.map(job => (
 										<Col lg={4} md={6} xs={12} key={job.id}>
 											<CardBox>
 												<StyledLink to={`/${job.id}`}>
@@ -137,8 +145,8 @@ function Home() {
 						}
 						{/* card smaple */}
 					</Row>
-					<LoadMoreButton disabled={isLoading || hasMore} onClick={onSearch}>
-							Load More
+					<LoadMoreButton disabled={isLoading || hasMore} onClick={getJobs}>
+						Load More
 					</LoadMoreButton>
 				</MainCard>
 			</MainBody>
