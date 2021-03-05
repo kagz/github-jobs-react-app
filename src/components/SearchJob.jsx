@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Form } from 'react-bootstrap';
 import {
@@ -7,7 +8,6 @@ import {
 
 function SearchJob(props) {
 	const { onSearch } = props;
-	const onSubmit = data => onSearch(data);
 	return (
 		<StyledForm>
 			<Form.Group>
@@ -15,7 +15,7 @@ function SearchJob(props) {
 				<StyledFormControl
 					name="location"
 					type="text"
-					onChange={e => onSubmit(e.target.value)}
+					onChange={e => onSearch(e.target.value)}
 				/>
 			</Form.Group>
 			{/* <Form.Group>
@@ -33,5 +33,4 @@ function SearchJob(props) {
 		</StyledForm>
 	);
 }
-
 export default SearchJob;
