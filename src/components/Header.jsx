@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Nav, Navbar } from 'react-bootstrap';
 import * as FaIcons from 'react-icons/fa';
 import SearchJob from './SearchJob';
 
 function Header() {
 	const [sidebar, setSidebar] = useState(false);
-
+	const [searchTerm, setSearchTerm] = useState('');
+	const onSearch = term => setSearchTerm(term);
 	const showSidebar = () => setSidebar(!sidebar);
+
+	useEffect(() => {
+
+	}, [searchTerm]);
 	return (
 		<>
 			<Navbar expand="lg" fixed="top" bg="dark" variant="dark">
@@ -22,7 +27,7 @@ function Header() {
 			</Navbar>
 			<Nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
 				<ul className="nav-menu-items">
-					<SearchJob />
+					<SearchJob onSearch={onSearch} />
 				</ul>
 			</Nav>
 		</>

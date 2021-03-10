@@ -75,15 +75,16 @@ function Home() {
 				setIsLoading(false);
 			});
 	}
-	const onSearch = async term => setSearchTerm(term);
 
 	useEffect(() => {
 		getJobs();
 	}, []);
 
-	// how can i use two fields to filter these guys??
+	//
+	const onSearch = term => setSearchTerm(term);
+
 	useEffect(() => {
-		setSortedJobs(
+		setSortedJobs(// hustle.full_time.includes(searchTerm.fullTime)
 			allJobs.filter(hustle => hustle.location.toLowerCase().includes(searchTerm.toLowerCase())),
 		);
 	}, [searchTerm, allJobs]);
