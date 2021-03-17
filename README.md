@@ -3,7 +3,7 @@
 		* [] babel
 		* [] react
 		* [] hooks
-		* [] bootstrap
+		* [] react-bootstrap
 		* [] sass
 		* [] axios
 
@@ -15,3 +15,7 @@
 
  ## API USED
 		* [] https://jobs.github.com/positions.json
+
+## Run App
+		* [] npm run proxy
+		* [] npm start

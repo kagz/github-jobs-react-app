@@ -7,8 +7,11 @@ import {
 	Button,
 	Col,
 	Container,
+	Nav,
+	Navbar,
 	Row,
 } from 'react-bootstrap';
+import * as FaIcons from 'react-icons/fa';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import client from '../client';
@@ -41,6 +44,8 @@ const LoadMoreButton = styled(Button)`
 `;
 dayjs.extend(relativeTime);
 function Home() {
+	const [sidebar, setSidebar] = useState(false);
+	const showSidebar = () => setSidebar(!sidebar);
 	const [isLoading, setIsLoading] = useState(false);
 	const [hasMore, setHasMore] = useState(false);
 	const [allJobs, setAllJobs] = useState([]);
@@ -91,6 +96,25 @@ function Home() {
 
 	return (
 		<Container>
+			{/* main header */}
+			<Navbar expand="lg" fixed="top" bg="dark" variant="dark">
+				<Navbar.Brand href="/">Git Jobs</Navbar.Brand>
+				<Button
+					className="d-md-none"
+					variant="secondary"
+					size="sm"
+					onClick={showSidebar}
+				>
+					{sidebar ? <FaIcons.FaSearchMinus /> : <FaIcons.FaSearchPlus />}
+				</Button>
+			</Navbar>
+			{/* mobile menu  */}
+			<Nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+				<ul className="nav-menu-items">
+					<SearchJob onSearch={onSearch} />
+				</ul>
+			</Nav>
+			{/* result body */}
 			<MainBody>
 				<Title>Search For Developer Jobs</Title>
 				<MainCard>
