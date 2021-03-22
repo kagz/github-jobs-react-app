@@ -4,22 +4,28 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {
 	Badge,
+	Button,
 	Col,
 	Container,
-	Pagination,
+	Nav,
+	Navbar,
 	Row,
 } from 'react-bootstrap';
+import * as FaIcons from 'react-icons/fa';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import client from '../client';
 import SearchJob from './SearchJob';
 import {
 	MainBody, Title,
-	StyledPagination, CardBox,
-	StyledLink, CompanyDetail,
+	CardBox, StyledLink, CompanyDetail,
 	CompanyLogo, JobDescription,
 	JobTitle, JobLocation,
 	TimeIcon, LocIcon,
 	ClickButton,
 } from './index.elements';
+
+const JOBS_PER_PAGE = 50;
 
 const MainCard = styled.div`
 	padding: 20px;
@@ -29,11 +35,28 @@ const MainCard = styled.div`
 	margin: 7px;
 `;
 
+const LoadMoreButton = styled(Button)`
+	margin-right: auto;
+	margin-left: auto;
+	display:block;
+	margin-top:4px;
+	margin-bottom:4px;
+`;
+dayjs.extend(relativeTime);
 function Home() {
-	const [jobs, setJobs] = useState(null);
-
-	useEffect(() => {
-		client.get('/positions.json')
+	const [sidebar, setSidebar] = useState(false);
+	const showSidebar = () => setSidebar(!sidebar);
+	const [isLoading, setIsLoading] = useState(false);
+	const [hasMore, setHasMore] = useState(false);
+	const [allJobs, setAllJobs] = useState([]);
+	const [sortedJobs, setSortedJobs] = useState([]);
+	const [searchTerm, setSearchTerm] = useState('');
+	async function getJobs() {
+		if (isLoading) return;
+		setIsLoading(true);
+		return client.get('/positions.json', {
+			params: { page: Math.ceil(allJobs.length / JOBS_PER_PAGE) },
+		})
 			.then(res => res.data.map(({
 				url,
 				company_url,
@@ -46,56 +69,75 @@ function Home() {
 				howToApply: how_to_apply,
 				companyLogo: company_logo,
 				url: new URL(url),
-				companyUrl: company_url ? new URL(company_url) : null,
 				createdAt: new Date(created_at),
 			})))
-			.then(setJobs);
+			.then(setAllJobs)
+			.catch(error => {
+				if (error.response.status === 404) setHasMore(false);
+				else return Promise.reject(error);
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
+	}
+
+	useEffect(() => {
+		getJobs();
 	}, []);
 
-	if (jobs === null) return <p>Loading...</p>;
-	if (!jobs.length) return <p>There are no jobs...</p>;
+	//
+	const onSearch = term => setSearchTerm(term);
+
+	useEffect(() => {
+		setSortedJobs(// hustle.full_time.includes(searchTerm.fullTime)
+			allJobs.filter(hustle => hustle.location.toLowerCase().includes(searchTerm.toLowerCase())),
+		);
+	}, [searchTerm, allJobs]);
 
 	return (
-		<>
-			<Container>
-				<MainBody>
-					<Title>Search For Developer Jobs</Title>
-					<MainCard>
-						<div className="d-none d-md-block">
-							<SearchJob />
-						</div>
-						<StyledPagination>
-							<Pagination>
-								{/* <Pagination.First /> */}
-								{/* <Pagination.Prev /> */}
-								{/* <Pagination.Item>{1}</Pagination.Item> */}
-								{/* <Pagination.Ellipsis /> */}
-								<Pagination.Item>{1}</Pagination.Item>
-								<Pagination.Item>{2}</Pagination.Item>
-								<Pagination.Item>{3}</Pagination.Item>
-								<Pagination.Item>{4}</Pagination.Item>
-
-								{/* <Pagination.Item active>{12}</Pagination.Item> */}
-								<Pagination.Item>{5}</Pagination.Item>
-								{/* <Pagination.Ellipsis /> */}
-								{/* <Pagination.Item>{20}</Pagination.Item> */}
-								{/* <Pagination.Next /> */}
-								{/* <Pagination.Last /> */}
-							</Pagination>
-						</StyledPagination>
-						<Row>
-							{/* card smaple */}
-							{
-								!jobs ? (
-									<p>loading..stuffs....</p>)
-
-									: jobs.map(job => (
+		<Container>
+			{/* main header */}
+			<Navbar expand="lg" fixed="top" bg="dark" variant="dark">
+				<Navbar.Brand href="/">Git Jobs</Navbar.Brand>
+				<Button
+					className="d-md-none"
+					variant="secondary"
+					size="sm"
+					onClick={showSidebar}
+				>
+					{sidebar ? <FaIcons.FaSearchMinus /> : <FaIcons.FaSearchPlus />}
+				</Button>
+			</Navbar>
+			{/* mobile menu  */}
+			<Nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+				<ul className="nav-menu-items">
+					<SearchJob onSearch={onSearch} />
+				</ul>
+			</Nav>
+			{/* result body */}
+			<MainBody>
+				<Title>Search For Developer Jobs</Title>
+				<MainCard>
+					<div className="d-none d-md-block">
+						<SearchJob onSearch={onSearch} />
+					</div>
+					<LoadMoreButton disabled={isLoading || hasMore} onClick={getJobs}>
+						Load More
+					</LoadMoreButton>
+					<Row>
+						{/* card sample */}
+						{
+							// eslint-disable-next-line no-nested-ternary
+							isLoading ? (<p>Loadingzzz...</p>)
+								: !sortedJobs.length ? (
+									<p>No Jobs Niggaa!!</p>)
+									: sortedJobs.map(job => (
 										<Col lg={4} md={6} xs={12} key={job.id}>
 											<CardBox>
 												<StyledLink to={`/${job.id}`}>
 													<div>
 														<CompanyDetail>
-															<CompanyLogo src={job.company_logo} roundedCircle />
+															<CompanyLogo src={job.companyLogo} roundedCircle />
 															<h6>
 																{job.company}
 															</h6>
@@ -108,7 +150,7 @@ function Home() {
 														<JobLocation>
 															<li>
 																<Badge pill>
-																	<TimeIcon />	{new Date(job.created_at).toLocaleDateString()}
+																	<TimeIcon />	{dayjs(job.createdAt).fromNow()}
 																</Badge>
 															</li>
 															<li>
@@ -119,41 +161,21 @@ function Home() {
 														</JobLocation>
 													</JobDescription>
 													<ClickButton>
-													Open Job
+														Open Job
 													</ClickButton>
-
 												</StyledLink>
 											</CardBox>
 										</Col>
 									))
-							}
-							{/* card smaple */}
-						</Row>
-						<StyledPagination>
-							<Pagination>
-								{/* <Pagination.First /> */}
-								{/* <Pagination.Prev /> */}
-								{/* <Pagination.Item>{1}</Pagination.Item> */}
-								{/* <Pagination.Ellipsis /> */}
-								<Pagination.Item>{1}</Pagination.Item>
-								<Pagination.Item>{2}</Pagination.Item>
-								<Pagination.Item>{3}</Pagination.Item>
-								<Pagination.Item>{4}</Pagination.Item>
-
-								{/* <Pagination.Item active>{12}</Pagination.Item> */}
-								<Pagination.Item>{5}</Pagination.Item>
-								{/* <Pagination.Ellipsis /> */}
-								{/* <Pagination.Item>{20}</Pagination.Item> */}
-								{/* <Pagination.Next /> */}
-								{/* <Pagination.Last /> */}
-							</Pagination>
-						</StyledPagination>
-					</MainCard>
-				</MainBody>
-
-			</Container>
-
-		</>
+						}
+						{/* card smaple */}
+					</Row>
+					<LoadMoreButton disabled={isLoading || hasMore} onClick={getJobs}>
+						Load More
+					</LoadMoreButton>
+				</MainCard>
+			</MainBody>
+		</Container>
 	);
 }
 export default Home;

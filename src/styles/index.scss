@@ -1,29 +1,44 @@
 @import "bootstrap";
-.page-link,
-.page-item:first-child .page-link,
-.page-item:last-child .page-link {
-	width: 40px;
+.container {
 	display: flex;
-	height: 40px;
-	color: #bf8c4f;
-	background-color: #262727;
-	line-height: 40px;
-	border-radius: 100%;
-	padding: 0;
-	position: relative;
-	justify-content: center;
-	align-items: center;
-	border: 3px solid #2ecc71;
-}
-.page-link:hover {
-	z-index: 2;
-	color: #cdd6e0;
-	text-decoration: none;
-	background-color: #343a40;
-	border: 3px solid #2ecc71;
+	list-style: none;
 }
 
-// shity trials menu
+.page {
+	padding: 10px;
+	border: 1px solid #dcdcdc;
+	border-radius: 6px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.disabled {
+	cursor: not-allowed;
+}
+
+.active {
+	border: 2px solid #000;
+	font-weight: bold;
+}
+
+.previous {
+	padding: 10px;
+	border-radius: 6px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.break {
+	padding: 10px;
+}
+
+.next {
+	padding: 10px;
+	border-radius: 6px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
 .nav-menu {
 	// background-color: #19191a;
 	width: 100%;
@@ -36,7 +51,7 @@
 	transition: 850ms;
 	color: rgb(226, 235, 226);
 	margin-top: 55px;
-  background-color: rgba(21, 30, 39, 1);
+	background-color: rgba(21, 30, 39, 1);
 	box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5), 0px 2px 2px 0px rgba(12, 12, 12, 0.5);
 	z-index: 1001;
 	&.active {
