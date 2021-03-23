@@ -96,8 +96,17 @@ const base = {
 const environments = {
 	development: {
 		mode: 'development',
-		devtool: 'eval-source-map',
-
+		devServer: {
+			historyApiFallback: true,
+			proxy: {
+				'/api': {
+					target: 'https://jobs.github.com/',
+					secure: false,
+					changeOrigin: true,
+					pathRewrite: { '^/api': '' },
+				},
+			},
+		},
 	},
 
 	production: {

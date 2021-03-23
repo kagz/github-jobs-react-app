@@ -7,6 +7,7 @@ module.exports = {
 	env: { browser: true },
 	rules: {
 		indent: [2, 'tab'],
+		camelcase: 0, // API uses snake_case
 		'no-tabs': 0,
 		'react/jsx-indent': 0,
 		'arrow-parens': [2, 'as-needed'],
@@ -16,6 +17,7 @@ module.exports = {
 		'react/jsx-indent-props': 0,
 		'react/jsx-props-no-spreading': 0,
 		'react/jsx-one-expression-per-line': 0,
+		'react/no-danger': 0,
 	},
 	overrides: [
 		{

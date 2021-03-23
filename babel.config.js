@@ -1,9 +1,12 @@
 'use strict';
 
 module.exports = function babelConfig(api) {
-	api.cache(process.env.NODE_ENV !== 'production');
+	const isProduction = process.env.NODE_ENV === 'production';
+
+	api.cache(!isProduction);
 
 	return {
+		sourceMaps: isProduction ? true : 'inline',
 		presets: [
 			['@babel/preset-env', {
 				corejs: '3.6.5',
@@ -20,6 +23,7 @@ module.exports = function babelConfig(api) {
 					'~': './src',
 				},
 			}],
+			['babel-plugin-styled-components'],
 		],
 	};
 };
