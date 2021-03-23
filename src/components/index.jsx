@@ -50,7 +50,8 @@ function Home() {
 	const [hasMore, setHasMore] = useState(false);
 	const [allJobs, setAllJobs] = useState([]);
 	const [sortedJobs, setSortedJobs] = useState([]);
-	const [searchTerm, setSearchTerm] = useState('');
+	const [searchLocation, setSearchLocation] = useState('');
+	const [searchDescription, setSearchDescription] = useState('');
 	async function getJobs() {
 		if (isLoading) return;
 		setIsLoading(true);
@@ -86,13 +87,16 @@ function Home() {
 	}, []);
 
 	//
-	const onSearch = term => setSearchTerm(term);
+	const onSearch = term => {
+		setSearchDescription(term.description);
+		setSearchLocation(term.location);
+	};
 
 	useEffect(() => {
-		setSortedJobs(// hustle.full_time.includes(searchTerm.fullTime)
-			allJobs.filter(hustle => hustle.location.toLowerCase().includes(searchTerm.toLowerCase())),
+		setSortedJobs(
+			allJobs.filter(hustle => hustle.location.toLowerCase().includes(searchLocation?.toLowerCase()) || hustle.description.toLowerCase().includes(searchDescription?.toLowerCase())),
 		);
-	}, [searchTerm, allJobs]);
+	}, [searchLocation, searchDescription, allJobs]);
 
 	return (
 		<Container>
